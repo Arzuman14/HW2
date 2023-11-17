@@ -84,8 +84,6 @@ class MainActivity : ComponentActivity() {
         if (requestCode == locationPermissionRequestCode) {
             if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 // Permission granted
-            } else {
-                print("nnnnnnnnnnnnnnnnnnnnnooooooooooooooooooo*******************")
             }
         }
     }

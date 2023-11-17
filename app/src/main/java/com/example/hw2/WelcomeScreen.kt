@@ -22,8 +22,8 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 
 @Composable
-fun WelcomeScreen(navController: NavHostController, viewModel: WeatherViewModel){
-    val weatherData = viewModel.weatherData.observeAsState()
+fun WelcomeScreen( navController: NavHostController, viewModel: WeatherViewModel){
+
 
     Column(
         modifier = Modifier.fillMaxSize(),

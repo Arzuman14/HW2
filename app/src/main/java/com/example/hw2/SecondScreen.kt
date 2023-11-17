@@ -1,5 +1,6 @@
 package com.example.hw2
 
+import android.text.TextUtils.indexOf
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -33,7 +34,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
-
+import kotlinx.coroutines.delay
 
 
 @Composable
@@ -47,6 +48,7 @@ fun SecondScreen(navController: NavHostController, viewModel: WeatherViewModel){
         CityData("Rotterdam",  "Stronger trough effort", R.drawable.rotterdam),
         CityData("Boston" , "Beantown", R.drawable.boston),
     )
+
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -54,12 +56,14 @@ fun SecondScreen(navController: NavHostController, viewModel: WeatherViewModel){
 
     ){
         LazyColumn {
-            items(cityList.chunked(3)){chunkOfCities ->
+            items(cityList.chunked(8)){chunkOfCities ->
                 Column(
                     modifier = Modifier.background(color = Color.Transparent),
                 ){
+
                     chunkOfCities.forEach{cityData ->
-                        CityRow(cityData = cityData, viewModel )
+                        viewModel.fetchWeatherData(cityData)
+                        CityRow(cityData = cityData, viewModel = viewModel)
                         Divider()
                     }
                 }
@@ -91,12 +95,11 @@ fun SecondScreen(navController: NavHostController, viewModel: WeatherViewModel){
 
 @Composable
 fun CityRow(cityData: CityData, viewModel:WeatherViewModel) {
-//    var temperature by remember { mutableStateOf<Double?>(null) }
+//    viewModel.fetchWeatherData(cityData)
     val weatherData = viewModel.weatherData.observeAsState()
-//     viewModel.fetchWeatherData(cityData){ temp ->
-//         temperature=temp
-//    }
-    viewModel.fetchWeatherData(cityData)
+//    viewModel.fetchWeatherData(cityData)
+//    delay(3000L)
+
     Card (
         modifier = Modifier
             .fillMaxSize()
